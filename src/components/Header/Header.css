@@ -1,0 +1,62 @@
+.header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.header__components{
+    display: flex;
+    align-items: center;
+    background-color: #404040;
+}
+
+.header__title{
+    color: white;
+    margin: 3rem 48% 3rem 15%;
+    display: inline-block;
+}
+
+.header__title > h3, p{
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.header__title > h3{
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.header__title > p{
+    color: lightblue;
+}
+
+.header__logo > img{
+    width: 4rem;
+    height: 4rem;
+    float: right;
+    cursor: pointer;
+}
+
+@media screen and (max-width:767px){
+    .header__title{
+        margin: 0.5rem 2%;
+        width: 0;
+    }
+
+    .header__title > p{
+        display: none;
+    }
+
+    .header__title > h3{
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .header__logo > img{
+        width: 2.5rem;
+        height: 2.5rem;
+        margin-left: 5rem;
+    }
+}
