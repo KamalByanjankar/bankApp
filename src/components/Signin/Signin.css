@@ -1,7 +1,7 @@
 .signin{
     margin-top: 10rem;
     position: absolute;
-    top: 20%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -41,6 +41,15 @@
 .signin__formbtn{
     margin: 15px 10px 10px 10px;
     padding: 5px 15px;
-    width: 100%;
+    width: 30%;
     cursor: pointer;
+}
+
+.sigin__form > p{
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.sigin__form > p > a{
+    text-decoration: none;
 }
