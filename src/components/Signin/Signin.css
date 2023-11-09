@@ -15,6 +15,7 @@
     box-shadow: 5px 5px 5px #000;
     padding: 20px;
     background-color: rgb(233, 233, 233);
+    border-radius: 15px;
 }
 
 .sigin__form > h3{
