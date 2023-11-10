@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import "./Signin.css"
 import { Link } from 'react-router-dom'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
 
 function Signin() {
   const [username, setUsername] = useState("")
@@ -9,8 +11,17 @@ function Signin() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    setUsername("")
-    setPassword("")
+    //Sign In using firebase
+    signInWithEmailAndPassword(auth, username, password)
+    .then((userCredentials) => {
+      console.log(userCredentials)
+
+      setUsername("")
+      setPassword("")
+    })
+    .catch((error) => {
+      alert(error)
+    })
   }
 
   return (
