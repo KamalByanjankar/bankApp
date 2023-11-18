@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import "./Signup.css"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
 
 function Signup() {
   const [firstName, setFirstName] = useState("")
@@ -11,11 +13,33 @@ function Signup() {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
 
+  let navigate = useNavigate()
+
   const handleRegistration = (e) => {
     e.preventDefault();
 
-    if(password !== confirmPassword){
-      alert("Password don't match")
+    if(password === confirmPassword){
+      //Create an account 
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        console.log(userCredentials)
+
+        setFirstName("")
+        setLastName("")
+        setEmail("")
+        setPhoneNumber("")
+        setDateOfBirth("")
+        setPassword("")
+        setConfirmPassword("")
+
+        navigate("/")
+      })
+      .catch((error) => {
+        alert(error)
+      })
+    }
+    else{
+      alert("Password don't match!")
     }
   }
 
@@ -52,7 +76,7 @@ function Signup() {
           <input className='form__input' type="password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
         </div>
         <input type="submit" value="Register" className="signup__formbtn" />
-        <p>Already have an account! <Link to="/">Sign In</Link></p>
+        <p>Already have an account!<Link to="/" >Sign In</Link></p>
       </form>
     </div>
   )
