@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import "./Signin.css"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 
 function Signin() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [authenticated, setAuthenticated] = useState(null)
+
+  const navigate = useNavigate()
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -14,7 +17,9 @@ function Signin() {
     //Sign In using firebase
     signInWithEmailAndPassword(auth, username, password)
     .then((userCredentials) => {
-      console.log(userCredentials)
+      setAuthenticated(true)
+      localStorage.setItem("authenticated", true);
+      navigate("/dashboard")
 
       setUsername("")
       setPassword("")
