@@ -25,7 +25,7 @@ function Signin() {
       setPassword("")
     })
     .catch((error) => {
-      alert(error)
+      alert("Invalid username or password!")
     })
   }
 
