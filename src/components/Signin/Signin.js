@@ -3,11 +3,12 @@ import "./Signin.css"
 import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
+import { useLocalStorage } from '../Util/useLocalStorage'
 
 function Signin() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [authenticated, setAuthenticated] = useState(null)
+  const [authenticated, setAuthenticated] = useLocalStorage("", "authenticated")
 
   const navigate = useNavigate()
 
