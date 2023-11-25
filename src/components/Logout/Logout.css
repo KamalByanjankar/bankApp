@@ -1,4 +1,11 @@
-.logout{
-    position: relative;
-    top: 3rem;
+.logout > button{
+    border: none;
+    background-color: inherit;
+    margin-top: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.logout > button:hover{
+    text-decoration: underline;
 }
