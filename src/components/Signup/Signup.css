@@ -59,4 +59,9 @@
 
 .signup__form > p > a{
     text-decoration: none;
+    margin: 0 auto;
+}
+
+.signup__form > p > a:hover{
+    text-decoration: underline;
 }

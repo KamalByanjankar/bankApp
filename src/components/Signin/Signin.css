@@ -54,3 +54,7 @@
 .sigin__form > p > a{
     text-decoration: none;
 }
+
+.sigin__form > p > a:hover{
+    text-decoration: underline;
+}
