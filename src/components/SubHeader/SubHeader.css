@@ -1,0 +1,31 @@
+.subHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10vh;
+}
+
+.subHeader__empty{
+    border: 1px solid rgb(252, 249, 249);
+    position: relative;
+    width: 72.5vw;
+    right: 20px;
+}
+
+.navbar__navigation > ul{
+padding: 20px;
+margin-top: 1rem;
+display: flex;
+justify-content: space-evenly;
+}
+  
+.navbar__navigation > ul > li{
+list-style-type: none;
+padding: 0;
+font-size: 16px;
+}
+
+.navbar__navigation > ul > li > a{
+    text-decoration: none;
+    color: black;
+}
