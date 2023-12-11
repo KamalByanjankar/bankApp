@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import "./Signup.css"
 import { Link, useNavigate } from 'react-router-dom'
+import db, { auth } from '../../context/firebase'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { addDoc, collection } from 'firebase/firestore'
 
 function Signup() {
   const [firstName, setFirstName] = useState("")
@@ -15,6 +18,33 @@ function Signup() {
 
   const handleRegistration = async (e) => {
     e.preventDefault();
+    if(password === confirmPassword){
+      //Create an account 
+      createUserWithEmailAndPassword(auth, email, password).then(
+        async (userCredentials) => {
+          // console.log(userCredentials)
+          try{
+            const docRef = collection(db, "users")
+            await addDoc(docRef, {
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              phoneNumber: phoneNumber,
+              dateOfBirth: dateOfBirth,
+              password: password,
+              userId: `${userCredentials.user.uid}`
+            })
+            navigate("/")
+            alert("User create successfully")
+          }catch(error){
+            alert("Something went wrong!")
+          }
+        }
+      )
+    }
+    else{
+      alert("Password don't match!")
+    }
   }
 
   return (
