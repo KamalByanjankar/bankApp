@@ -17,6 +17,7 @@ function Signin() {
     .then((result) => {
       setUsername(username)
       setIsLoggedIn(true)
+      
       localStorage.setItem("authenticated", true)
       navigate("/dashboard")
     })
