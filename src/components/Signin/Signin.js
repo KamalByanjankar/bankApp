@@ -1,15 +1,28 @@
 import React, { useState } from 'react'
 import "./Signin.css"
 import { Link, useNavigate } from 'react-router-dom'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 function Signin() {
   const [username, setUsername] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [password, setPassword] = useState("")
 
   const navigate = useNavigate()
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    //Sign In using firebase
+    signInWithEmailAndPassword(auth, username, password)
+    .then((result) => {
+      setUsername(username)
+      setIsLoggedIn(true)
+      localStorage.setItem("authenticated", true)
+      navigate("/dashboard")
+    })
+    .catch((error) => {
+      alert("Invalid username or password!")
+    })
   }
 
   return (
