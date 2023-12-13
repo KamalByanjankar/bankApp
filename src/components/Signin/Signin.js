@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./Signin.css"
 import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../context/firebase'
 
 function Signin() {
   const [username, setUsername] = useState("")
@@ -17,7 +18,6 @@ function Signin() {
     .then((result) => {
       setUsername(username)
       setIsLoggedIn(true)
-      
       localStorage.setItem("authenticated", true)
       navigate("/dashboard")
     })
