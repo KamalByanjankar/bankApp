@@ -1,67 +1,103 @@
 .signup{
-    margin-top: 10rem;
+    background-color: rgb(233, 233, 233);
+    margin-top: 22rem;
     position: absolute;
-    top: 35%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 550px;
-}
-
-.signup__form{
-    border: 1px solid gray;
-    box-shadow: 5px 5px 5px #000;
     padding: 40px;
-    background-color: rgb(233, 233, 233);
-    text-align: left;
-    border-radius: 15px;
+    width: 720px;
+    overflow: hidden;
+    z-index: -999;
+    color: #12458D;
 }
 
 .signup__form > h3{
-    padding: 0;
-    margin: 0 0 1.5rem 0;
-    display: grid;
+    font-family: Verdana, sans-serif;
+    font-size: 30px;
     text-align: center;
-    font-size: 20px;
+    font-weight: 500;
 }
 
-.signup__form > *{
-    padding: 5px;
-    display: flex;
+.horizontal__line{
+    border: 1px solid black;
+    margin: 5px 0;
+}
+
+.signup__form__header{
+    font-size: 20px;
+    font-weight: 500;
+    padding: 20px 0;
+    font-family: Verdana, sans-serif;
 }
 
 .form__label{
-    width: 30%;
+    display: block;
+    margin: 12px 0 5px 0;
 }
 
 .form__input{
-    width: 50%;
-    margin-left: 2rem;
-    border-radius: 10px;
-    padding: 5px 10px;
-    border: 1px solid black;
+    border-radius: 5px;
+    padding: 7px 10px;
+    border: 0;
+    font-size: 16px;
+    margin: 5px 20px 5px 0;
+    /* width: 320px; */
 }
 
 .form__input:focus{
     outline: none;
 }
 
-.signup__formbtn{
-    margin: 20px auto;
-    padding: 5px 15px;
-    cursor: pointer;
+.dob > input, .maritalStatus > input, 
+.telephoneNumber > input, .email > input,
+.addressField > input, .accountField > input
+{
+    width: 320px;
 }
 
-.signup__form > p{
+.address, .accountType{
+    width: 680px;
+}
+
+.test{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.signup__formbtn{
+    margin: 30px auto;
+    padding: 10px 15px;
+    cursor: pointer;
+    display: grid;
+    width: 200px;
+    font-size: 16px;
+    background-color: rgb(88, 88, 248);
+    color: #fff;
+    border: none;
+    box-shadow: 1px 1px 5px black;
+    border-radius: 5px;
+}
+
+.signup__formbtn:hover{
+    background-color: darkblue;
+}
+
+.link{
     font-size: 14px;
     display: grid;
     text-align: center;
 }
 
-.signup__form > p > a{
+.link > a{
     text-decoration: none;
     margin: 0 auto;
 }
 
-.signup__form > p > a:hover{
+.link > a:hover{
     text-decoration: underline;
 }
