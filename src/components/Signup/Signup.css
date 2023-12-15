@@ -101,3 +101,23 @@
 .link > a:hover{
     text-decoration: underline;
 }
+
+.dropzone{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    border: 2px dashed rgb(117, 112, 112);
+    padding: 10px;
+    margin: 15px 0;
+}
+
+.dropzone > p{
+    padding: 5px 0;
+}
+
+button{
+    padding: 8px;
+    font-size: 16px;
+}
