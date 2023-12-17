@@ -1,21 +1,19 @@
 .signin{
-    margin-top: 10rem;
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sigin__form{
-    width: 100%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid gray;
-    box-shadow: 5px 5px 5px #000;
+    box-shadow: 2px 2px 5px #000;
     padding: 20px;
     background-color: rgb(233, 233, 233);
     border-radius: 15px;
+    margin-top: 12rem;
 }
 
 .sigin__form > h3{
@@ -28,7 +26,7 @@
 }
 
 .sigin__form > label > input{
-    width: 15vw;
+    width: 16vw;
     margin-left: 20px;
     border-radius: 10px;
     padding: 5px 10px;
@@ -57,4 +55,29 @@
 
 .sigin__form > p > a:hover{
     text-decoration: underline;
+}
+
+@media only screen and (max-width: 980px) {
+    .sigin__form{
+        width: 60%;
+        margin-top: 7rem;
+    }
+
+    .sigin__form > label > input{
+        width: 30vw;
+    }
+
+    .sigin__form > p{
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 490px) {
+    .sigin__form{
+        width: 80%;
+    }
+
+    .sigin__form > label > input{
+        width: 40vw;
+    }
 }
