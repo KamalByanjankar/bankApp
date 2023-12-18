@@ -23,7 +23,6 @@ function Signup() {
   })
 
   const refValue = useRef()
-  let navigate = useNavigate()
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -44,6 +43,7 @@ function Signup() {
     }
   }
 
+  console.log(user.firstName)
   return (
     <div className="signup">
       <form className="signup__form">
@@ -53,43 +53,55 @@ function Signup() {
         <div className="horizontal__line"></div>
 
         <div>
-          <label className="form__label">Full Name <span>*</span></label>
-          <input className="form__input" type="text" name="title" />
-          <input className="form__input" type="text" name="firstName" placeholder="First Name" onChange={(e) => setUser({firstName: e.target.value})}/>
-          <input className="form__input" type="text" name="lastName" placeholder="Last Name"/>
+          <label className="form__label" htmlFor="name">Full Name <span>*</span></label>
+          <select className="title__dropdown">
+            <option disabled selected>Choose</option>
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Prof">Prof</option>
+            <option value="Dr">Dr</option>
+            <option value="Others">Others</option>
+          </select>
+          <input className="form__input name" type="text" id="name" name="firstName" placeholder="First Name" onChange={(e) => setUser({firstName: e.target.value})}/>
+          <input className="form__input name" type="text" name="lastName" placeholder="Last Name"/>
         </div>
 
-        <div className="test">
+        <div className="form__content">
           <div className="dob">
-            <label className="form__label">Date of Birth <span>*</span></label>
-            <input className="form__input" type="date" name="dob"/>
+            <label className="form__label" htmlFor="dob">Date of Birth <span>*</span></label>
+            <input className="form__input" type="date" id="dob" name="dob"/>
           </div>  
-            
           <div className="maritalStatus">
-            <label className="form__label">Marital Status <span>*</span></label>
-            <input className="form__input" type="text" name="maritalStatus"/>
+            <label className="form__label" htmlFor="maritalStatus">Marital Status <span>*</span></label>
+            {/* <input className="form__input" id="maritalStatus" type="text" name="maritalStatus"/> */}
+            <select className="dropdown">
+              <option selected disabled>Please select</option>
+              <option value="single">Single</option>
+              <option value="married">Married</option>
+              <option value="divorced">Divorced</option>
+            </select>
           </div>
         </div>
 
-        <div className="test">
+        <div className="form__content">
           <div className="telephoneNumber">
-            <label className="form__label">Telephone Number <span>*</span></label>
-            <input className="form__input" type="number" name="telephoneNumber" placeholder="01 234 5678967"/>
+            <label className="form__label" htmlFor="telephoneNumber">Telephone Number <span>*</span></label>
+            <input className="form__input name" type="number" id="telephoneNumber" name="telephoneNumber" placeholder="01 234 5678967"/>
           </div>
           <div className="email">
-            <label className="form__label">E-mail <span>*</span></label>
-            <input className="form__input" type="email" name="email"/>
+            <label className="form__label" htmlFor="email">E-mail <span>*</span></label>
+            <input className="form__input name" type="email" id="email" name="email" placeholder="E-Mail Address"/>
           </div>
         </div>
 
         <div>
-          <label className="form__label">Mailing Home Address <span>*</span></label>
-          <input className="form__input address" type="text" name="streetAddress" placeholder="Street Address"/>          
-          <div className="test addressField">
+          <label className="form__label" htmlFor="streetAddress">Mailing Home Address <span>*</span></label>
+          <input className="form__input address" type="text" id="streetAddress" name="streetAddress" placeholder="Street Address"/>          
+          <div className="form__content addressField">
             <input className="form__input" type="text" name="city" placeholder="City"/>
             <input className="form__input" type="text" name="state" placeholder="State"/>
           </div>
-          <div className="test addressField">
+          <div className="form__content addressField">
             <input className="form__input" type="number" name="postalcode" placeholder="Postal / Zip Code"/>
             <input className="form__input" type="text" name="country" placeholder="Country" />
           </div>
@@ -113,18 +125,23 @@ function Signup() {
           <div className="horizontal__line"></div>
           <div>
             <label className="form__label">Account Type <span>*</span></label>
-            <input className="form__input accountType" type="text" name="accountType" />
+            {/* <input className="form__input accountType" type="text" name="accountType" /> */}
+            <select className="dropdown accountType">
+              <option selected disabled>Please select an account type</option>
+              <option value="saving">Saving Account</option>
+              <option value="current">Current Account</option>
+            </select>
           </div>
         </div>
 
-        <div className="test">
+        <div className="form__content">
           <div className="accountField">
-            <label className="form__label">Occupation <span>*</span></label>
-            <input className="form__input" type="text" name="occupation" placeholder="Occupation"/>
+            <label className="form__label" htmlFor="occupation">Occupation <span>*</span></label>
+            <input className="form__input" type="text" id="occupation" name="occupation" placeholder="Occupation"/>
           </div>
           <div className="accountField">
-            <label className="form__label">Monthly Income <span>*</span></label>
-            <input className="form__input" type="number" name="monthlyIncome"/>
+            <label className="form__label" htmlFor="monthlyIncome">Monthly Income <span>*</span></label>
+            <input className="form__input" type="number" id="monthlyIncome" name="monthlyIncome" placeholder="Monthly Income"/>
           </div>
         </div>
 
