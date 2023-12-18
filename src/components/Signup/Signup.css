@@ -40,8 +40,7 @@
 }
 
 .name{
-    /* width: 260px; */
-    width: 35%;
+    width: 36%;
 }
 
 .form__label{
@@ -49,7 +48,7 @@
     margin: 12px 0 5px 0;
 }
 
-.form__input{
+.form__input, .dropdown, .title__dropdown{
     border-radius: 5px;
     padding: 7px 10px;
     border: 0;
@@ -68,8 +67,8 @@
 
 .dob > input, .maritalStatus > input, 
 .telephoneNumber > input, .email > input,
-.addressField > input, .accountField > input
-{
+.addressField > input, .accountField > input,
+.dropdown{
     width: 320px;
 }
 
