@@ -37,7 +37,7 @@
 
 @media screen and (max-width:980px){
     .header__components{
-        padding: 20px 50px;
+        padding: 20px 40px;
         justify-content: space-between;
     }
 
