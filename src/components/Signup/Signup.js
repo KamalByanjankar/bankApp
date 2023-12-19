@@ -11,7 +11,7 @@ function Signup() {
     maritalStatus: "",
     phoneNumber: "",
     email: "",
-    address: "",
+    streetAddress: "",
     city: "",
     state: "",
     postalCode: "",
@@ -20,13 +20,19 @@ function Signup() {
     accountType: "",
     occupation: "",
     monthlyIncome: "",
-    passowrd: "",
+    password: "",
     confirmPassword: ""
   })
 
-
   const refValue = useRef()
   let navigate = useNavigate()
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
+    })
+  }
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -36,18 +42,24 @@ function Signup() {
     e.preventDefault()
     const file = e.dataTransfer.files[0]
     if(file){
-      setUser({photoUrl: URL.createObjectURL(file)})
+      // setUser({photoUrl: URL.createObjectURL(file)})
+      setUser({
+        ...user, 
+        photoUrl: URL.createObjectURL(file)
+      })
     }
   }
 
   const onFileChange = (e) => {
     const file = e.target.files[0]
     if(file){
-      setUser({photoUrl: URL.createObjectURL(file)})
+      setUser({
+        ...user, 
+        photoUrl: URL.createObjectURL(file)
+      })
     }
   }
 
-  console.log(user.firstName)
   return (
     <div className="signup">
       <form className="signup__form">
@@ -58,56 +70,55 @@ function Signup() {
 
         <div>
           <label className="form__label" htmlFor="name">Full Name <span>*</span></label>
-          <select className="title__dropdown">
-            <option disabled selected>Choose</option>
+          <select className="title__dropdown" required name="title" value={user.title} onChange={handleChange}>
+            <option value="DEFAULT">Choose</option>
             <option value="Mr">Mr</option>
             <option value="Mrs">Mrs</option>
             <option value="Prof">Prof</option>
             <option value="Dr">Dr</option>
             <option value="Others">Others</option>
           </select>
-          <input className="form__input name" type="text" id="name" name="firstName" placeholder="First Name" onChange={(e) => setUser({firstName: e.target.value})}/>
-          <input className="form__input name" type="text" name="lastName" placeholder="Last Name"/>
+          <input className="form__input name" type="text" id="name" required name="firstName" value={user.firstName} placeholder="First Name" onChange={handleChange}/>
+          <input className="form__input name" type="text" required name="lastName" value={user.lastName} placeholder="Last Name" onChange={handleChange}/>
         </div>
 
         <div className="form__content">
           <div className="dob">
             <label className="form__label" htmlFor="dob">Date of Birth <span>*</span></label>
-            <input className="form__input" type="date" id="dob" name="dob"/>
+            <input className="form__input" type="date" id="dob" required name="dateOfBirth" value={user.dateOfBirth} onChange={handleChange}/>
           </div>  
           <div className="maritalStatus">
             <label className="form__label" htmlFor="maritalStatus">Marital Status <span>*</span></label>
-            {/* <input className="form__input" id="maritalStatus" type="text" name="maritalStatus"/> */}
-            <select className="dropdown">
-              <option selected disabled>Please select</option>
-              <option value="single">Single</option>
-              <option value="married">Married</option>
-              <option value="divorced">Divorced</option>
+            <select className="dropdown" required name="maritalStatus" value={user.maritalStatus} onChange={handleChange}>
+              <option value="DEFAULT">Please select</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Divorced">Divorced</option>
             </select>
           </div>
         </div>
 
         <div className="form__content">
           <div className="telephoneNumber">
-            <label className="form__label" htmlFor="telephoneNumber">Telephone Number <span>*</span></label>
-            <input className="form__input name" type="number" id="telephoneNumber" name="telephoneNumber" placeholder="01 234 5678967"/>
+            <label className="form__label" htmlFor="phoneNumber">Telephone Number <span>*</span></label>
+            <input className="form__input name" type="number" id="telephoneNphoneNumberumber" required name="phoneNumber" value={user.phoneNumber} placeholder="01 234 5678967" onChange={handleChange}/>
           </div>
           <div className="email">
             <label className="form__label" htmlFor="email">E-mail <span>*</span></label>
-            <input className="form__input name" type="email" id="email" name="email" placeholder="E-Mail Address"/>
+            <input className="form__input name" type="email" id="email" required name="email" value={user.email} placeholder="E-Mail Address" onChange={handleChange}/>
           </div>
         </div>
 
         <div>
-          <label className="form__label" htmlFor="streetAddress">Mailing Home Address <span>*</span></label>
-          <input className="form__input address" type="text" id="streetAddress" name="streetAddress" placeholder="Street Address"/>          
+          <label className="form__label">Mailing Home Address <span>*</span></label>
+          <input className="form__input address" type="text" required name="streetAddress" value={user.streetAddress} placeholder="Street Address" onChange={handleChange}/>          
           <div className="form__content addressField">
-            <input className="form__input" type="text" name="city" placeholder="City"/>
-            <input className="form__input" type="text" name="state" placeholder="State"/>
+            <input className="form__input" type="text" required name="city" value={user.city} placeholder="City" onChange={handleChange}/>
+            <input className="form__input" type="text" required name="state" value={user.state} placeholder="State" onChange={handleChange}/>
           </div>
           <div className="form__content addressField">
-            <input className="form__input" type="number" name="postalcode" placeholder="Postal / Zip Code"/>
-            <input className="form__input" type="text" name="country" placeholder="Country" />
+            <input className="form__input" type="number" required name="postalCode" value={user.postalCode} placeholder="Postal / Zip Code" onChange={handleChange}/>
+            <input className="form__input" type="text" required name="country" value={user.country} placeholder="Country" onChange={handleChange}/>
           </div>
         </div>
 
@@ -117,7 +128,7 @@ function Signup() {
             <p>Drag and Drop Files to Upload</p>
             <p>Or</p>
             <p>Click to upload image</p>
-            <input type="file" name="photoUrl" ref={refValue} onChange={onFileChange} hidden/>
+            <input type="file" ref={refValue} name="photoUrl" onChange={onFileChange} required hidden/>
           </div>
           {
             user.photoUrl ? (<img src={user.photoUrl} alt="User Profile" width={120} height={150}/>) : ""
@@ -129,11 +140,10 @@ function Signup() {
           <div className="horizontal__line"></div>
           <div>
             <label className="form__label">Account Type <span>*</span></label>
-            {/* <input className="form__input accountType" type="text" name="accountType" /> */}
-            <select className="dropdown accountType">
-              <option selected disabled>Please select an account type</option>
-              <option value="saving">Saving Account</option>
-              <option value="current">Current Account</option>
+            <select className="dropdown accountType" required name="accountType" value={user.accountType} onChange={handleChange}>
+              <option value='DEFAULT'>Please select an account type</option>
+              <option value="Saving Account">Saving Account</option>
+              <option value="Current Account">Current Account</option>
             </select>
           </div>
         </div>
@@ -141,22 +151,22 @@ function Signup() {
         <div className="form__content">
           <div className="accountField">
             <label className="form__label" htmlFor="occupation">Occupation <span>*</span></label>
-            <input className="form__input" type="text" id="occupation" name="occupation" placeholder="Occupation"/>
+            <input className="form__input" type="text" id="occupation" required name="occupation" value={user.occupation} placeholder="Occupation" onChange={handleChange}/>
           </div>
           <div className="accountField">
             <label className="form__label" htmlFor="monthlyIncome">Monthly Income <span>*</span></label>
-            <input className="form__input" type="number" id="monthlyIncome" name="monthlyIncome" placeholder="Monthly Income"/>
+            <input className="form__input" type="number" id="monthlyIncome" required name="monthlyIncome" value={user.monthlyIncome} placeholder="Monthly Income" onChange={handleChange}/>
           </div>
         </div>
 
         <div className="form__content">
           <div className="password">
             <label className="form__label" htmlFor="password">Password <span>*</span></label>
-            <input className="form__input name" type="password" id="password" name="password"/>
+            <input className="form__input name" type="password" id="password" required name="password" value={user.password} onChange={handleChange}/>
           </div>
           <div className="confirmPassword">
             <label className="form__label" htmlFor="confirmPassword">Confirm Password <span>*</span></label>
-            <input className="form__input name" type="password" id="confirmPassword" name="confirmPassword" />
+            <input className="form__input name" type="password" id="confirmPassword" required name="confirmPassword" value={user.confirmPassword} onChange={handleChange}/>
           </div>
         </div>
 
