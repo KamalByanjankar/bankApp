@@ -19,10 +19,14 @@ function Signup() {
     photoUrl: "",
     accountType: "",
     occupation: "",
-    monthlyIncome: ""
+    monthlyIncome: "",
+    passowrd: "",
+    confirmPassword: ""
   })
 
+
   const refValue = useRef()
+  let navigate = useNavigate()
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -142,6 +146,17 @@ function Signup() {
           <div className="accountField">
             <label className="form__label" htmlFor="monthlyIncome">Monthly Income <span>*</span></label>
             <input className="form__input" type="number" id="monthlyIncome" name="monthlyIncome" placeholder="Monthly Income"/>
+          </div>
+        </div>
+
+        <div className="form__content">
+          <div className="password">
+            <label className="form__label" htmlFor="password">Password <span>*</span></label>
+            <input className="form__input name" type="password" id="password" name="password"/>
+          </div>
+          <div className="confirmPassword">
+            <label className="form__label" htmlFor="confirmPassword">Confirm Password <span>*</span></label>
+            <input className="form__input name" type="password" id="confirmPassword" name="confirmPassword" />
           </div>
         </div>
 

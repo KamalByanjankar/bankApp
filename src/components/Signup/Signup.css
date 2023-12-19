@@ -68,7 +68,7 @@
 .dob > input, .maritalStatus > input, 
 .telephoneNumber > input, .email > input,
 .addressField > input, .accountField > input,
-.dropdown{
+.dropdown, .password > input, .confirmPassword > input{
     width: 320px;
 }
 
@@ -150,8 +150,8 @@ button{
 
     .dob > input, .maritalStatus > input, 
     .telephoneNumber > input, .email > input,
-    .addressField > input, .accountField > input
-    {
+    .addressField > input, .accountField > input,
+    .password > input, .confirmPassword > input{
         width: 275px;
     }
 
@@ -167,8 +167,8 @@ button{
 
     .dob > input, .maritalStatus > input, 
     .telephoneNumber > input, .email > input,
-    .addressField > input, .accountField > input
-    {
+    .addressField > input, .accountField > input,
+    .password > input, .confirmPassword > input{
         width: 100%;
     }
 
