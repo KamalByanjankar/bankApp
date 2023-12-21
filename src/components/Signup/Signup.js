@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react'
 import "./Signup.css"
 import { Link, useNavigate } from 'react-router-dom'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../context/firebase'
 
 function Signup() {
   const [user, setUser] = useState({
@@ -34,6 +36,21 @@ function Signup() {
     })
   }
 
+  const handleRegistration = async (e) => {
+    e.preventDefault();
+    if(user.password === user.confirmPassword){
+      //Create an account 
+      createUserWithEmailAndPassword(auth, user.email, user.password).then(
+        async (userCredentials) => {
+          console.log(userCredentials)
+        }
+      )
+    }
+    else{
+      alert("Password don't match!")
+    }
+  }
+
   const handleDragOver = (e) => {
     e.preventDefault();
   }
@@ -62,7 +79,7 @@ function Signup() {
 
   return (
     <div className="signup">
-      <form className="signup__form">
+      <form className="signup__form" onSubmit={handleRegistration}>
         <h3>Account Opening Form</h3>
         <div className="horizontal__line"></div>
         <p className="signup__form__header">Personal Information</p>
