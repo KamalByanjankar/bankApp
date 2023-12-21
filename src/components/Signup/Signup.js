@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import db, { auth } from '../../context/firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { addDoc, collection } from 'firebase/firestore'
+import { generateAccountNumber } from '../Util/generateAccountNumber'
 
 function Signup() {
   const [user, setUser] = useState({
@@ -24,7 +25,8 @@ function Signup() {
     occupation: "",
     monthlyIncome: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    accountNumber: ""
   })
 
   const refValue = useRef()
@@ -42,7 +44,15 @@ function Signup() {
   const handleRegistration = async (e) => {
     e.preventDefault();
     if(user.password === user.confirmPassword){
-      //Create an account 
+
+      // Generate account number
+      const generatedAccountNumber = generateAccountNumber(user.accountType)
+      setUser({
+        ...user,
+        accountNumber: generatedAccountNumber
+      })
+
+      // Create an account 
       createUserWithEmailAndPassword(auth, user.email, user.password).then(
         async (userCredentials) => {
           try{
@@ -64,7 +74,7 @@ function Signup() {
               accountType: user.accountType,
               occupation: user.occupation,
               monthlyIncome: user.monthlyIncome,
-              password: user.password,
+              accountNumber: user.accountNumber,
               userId: `${userCredentials.user.uid}`
             })
             navigate("/")
