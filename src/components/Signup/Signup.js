@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useId} from 'react'
 import "./Signup.css"
 import { Link, useNavigate } from 'react-router-dom'
+import db, { auth } from '../../context/firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../context/firebase'
+import { addDoc, collection } from 'firebase/firestore'
 
 function Signup() {
   const [user, setUser] = useState({
@@ -36,13 +37,41 @@ function Signup() {
     })
   }
 
+  const userId = `user${useId()}`
+
   const handleRegistration = async (e) => {
     e.preventDefault();
     if(user.password === user.confirmPassword){
       //Create an account 
       createUserWithEmailAndPassword(auth, user.email, user.password).then(
         async (userCredentials) => {
-          console.log(userCredentials)
+          try{
+            const docRef = collection(db, `users/${userId}/userInformation`)
+            await addDoc(docRef, {
+              title: user.title,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              dateOfBirth: user.dateOfBirth,
+              maritalStatus: user.maritalStatus,
+              phoneNumber: user.phoneNumber,
+              email: user.email,
+              streetAddress: user.streetAddress,
+              city: user.city,
+              state: user.state,
+              postalCode: user.postalCode,
+              country: user.country,
+              photoUrl: user.photoUrl,
+              accountType: user.accountType,
+              occupation: user.occupation,
+              monthlyIncome: user.monthlyIncome,
+              password: user.password,
+              userId: `${userCredentials.user.uid}`
+            })
+            navigate("/")
+            alert("User create successfully")
+          }catch(error){
+            alert("Something went wrong!")
+          }
         }
       )
     }
