@@ -1,10 +1,10 @@
-import React, { useRef, useState, useId} from 'react'
+import React, { useRef, useState, useId } from 'react'
 import "./Signup.css"
 import { Link, useNavigate } from 'react-router-dom'
 import db, { auth } from '../../context/firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { addDoc, collection } from 'firebase/firestore'
-import { generateAccountNumber } from '../Util/generateAccountNumber'
+import { generateAccountNumber, generateIban } from '../Util/generateAccountNumber'
 
 function Signup() {
   const [user, setUser] = useState({
@@ -26,11 +26,14 @@ function Signup() {
     monthlyIncome: "",
     password: "",
     confirmPassword: "",
-    accountNumber: ""
+    accountNumber: "",
+    iban: "",
+    balance: "0.00"
   })
 
   const refValue = useRef()
   let navigate = useNavigate()
+  const userId = `user${useId()}`
 
   const handleChange = (e) => {
     setUser({
@@ -39,24 +42,28 @@ function Signup() {
     })
   }
 
-  const userId = `user${useId()}`
+  const createAccount = (type) => {
+    // Generate account number
+    const generatedAccountNumber = generateAccountNumber(type)
+    const generatedIban = generateIban(generatedAccountNumber)
+    setUser({
+      ...user,
+      accountNumber: generatedAccountNumber,
+      iban: generatedIban
+    })
+  }
 
   const handleRegistration = async (e) => {
     e.preventDefault();
     if(user.password === user.confirmPassword){
 
-      // Generate account number
-      const generatedAccountNumber = generateAccountNumber(user.accountType)
-      setUser({
-        ...user,
-        accountNumber: generatedAccountNumber
-      })
+      createAccount(user.accountType)
 
       // Create an account 
       createUserWithEmailAndPassword(auth, user.email, user.password).then(
         async (userCredentials) => {
           try{
-            const docRef = collection(db, `users/${userId}/userInformation`)
+            const docRef = collection(db, `users/${userId}/User Information`)
             await addDoc(docRef, {
               title: user.title,
               firstName: user.firstName,
@@ -71,12 +78,22 @@ function Signup() {
               postalCode: user.postalCode,
               country: user.country,
               photoUrl: user.photoUrl,
-              accountType: user.accountType,
               occupation: user.occupation,
               monthlyIncome: user.monthlyIncome,
-              accountNumber: user.accountNumber,
               userId: `${userCredentials.user.uid}`
             })
+            try{
+              const docRef = collection(db, `users/${userId}/Account Information`)
+              await addDoc(docRef, {
+                accountType: user.accountType,
+                accountNumber: user.accountNumber,
+                iban: user.iban,
+                balance: user.balance,
+              })
+            }catch(error){
+              alert("Error while creating an account")
+            }
+      
             navigate("/")
             alert("User create successfully")
           }catch(error){
@@ -98,7 +115,6 @@ function Signup() {
     e.preventDefault()
     const file = e.dataTransfer.files[0]
     if(file){
-      // setUser({photoUrl: URL.createObjectURL(file)})
       setUser({
         ...user, 
         photoUrl: URL.createObjectURL(file)
