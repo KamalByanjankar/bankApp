@@ -9,17 +9,18 @@
     align-items: center;
     justify-content: space-around;
     background-color: #404040;
-    padding: 40px 0;
+    padding: 40px 0px;
 }
 
 .header__title{
     color: white;
+    margin-right: 15rem;
 }
 
 .header__title > h3, p{
     padding: 0;
     margin: 0;
-    letter-spacing: 1.5px;
+    /* letter-spacing: 1.5px; */
 }
 
 .header__title > h3{
