@@ -1,5 +1,6 @@
 function generateAccountNumber(accountType){
     let accountNumber;
+
     if(accountType === "Saving Account"){
         accountNumber = "10" + generateAccount(5);
     }
@@ -13,6 +14,12 @@ function generateAccountNumber(accountType){
     return accountNumber;
 }
 
+function generateIban(accountNumber){
+    let iban;
+    iban = "PT0000000000" + generateAccount(1) + "0000" + accountNumber  + generateAccount(1);
+    return iban;
+}
+
 const generateAccount = (length) => {
     let result = ""
     const charater = "0123456789"
@@ -24,4 +31,4 @@ const generateAccount = (length) => {
     return result;
 }
 
-export {generateAccountNumber}
+export {generateAccountNumber, generateIban}
