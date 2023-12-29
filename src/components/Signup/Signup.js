@@ -1,69 +1,35 @@
-import React, { useRef, useState, useId } from 'react'
+import React, { useRef } from 'react'
 import "./Signup.css"
 import { Link, useNavigate } from 'react-router-dom'
 import db, { auth } from '../../context/firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { addDoc, collection } from 'firebase/firestore'
-import { generateAccountNumber, generateIban } from '../Util/generateAccountNumber'
+import { useFormContext } from '../../context/FormProvider'
 
 function Signup() {
-  const [user, setUser] = useState({
-    title: "",
-    firstName: "",
-    lastName: "",
-    dateOfBirth: "",
-    maritalStatus: "",
-    phoneNumber: "",
-    email: "",
-    streetAddress: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    country: "",
-    photoUrl: "",
-    accountType: "",
-    occupation: "",
-    monthlyIncome: "",
-    password: "",
-    confirmPassword: "",
-    accountNumber: "",
-    iban: "",
-    balance: "0.00"
-  })
+  const {
+    user,
+    handleChange, 
+    handleDragOver, 
+    handleDrop, 
+    onFileChange,
+    createAccount
+  } = useFormContext()
 
   const refValue = useRef()
   let navigate = useNavigate()
-  const userId = `user${useId()}`
-
-  const handleChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value
-    })
-  }
-
-  const createAccount = (type) => {
-    // Generate account number
-    const generatedAccountNumber = generateAccountNumber(type)
-    const generatedIban = generateIban(generatedAccountNumber)
-    setUser({
-      ...user,
-      accountNumber: generatedAccountNumber,
-      iban: generatedIban
-    })
-  }
 
   const handleRegistration = async (e) => {
     e.preventDefault();
     if(user.password === user.confirmPassword){
 
-      createAccount(user.accountType)
+      createAccount()
 
       // Create an account 
       createUserWithEmailAndPassword(auth, user.email, user.password).then(
         async (userCredentials) => {
           try{
-            const docRef = collection(db, `users/${userId}/User Information`)
+            const docRef = collection(db, "users")
             await addDoc(docRef, {
               title: user.title,
               firstName: user.firstName,
@@ -80,20 +46,12 @@ function Signup() {
               photoUrl: user.photoUrl,
               occupation: user.occupation,
               monthlyIncome: user.monthlyIncome,
+              accountType: user.accountType,
+              accountNumber: user.accountNumber,
+              iban: user.iban,
+              balance: user.balance,
               userId: `${userCredentials.user.uid}`
-            })
-            try{
-              const docRef = collection(db, `users/${userId}/Account Information`)
-              await addDoc(docRef, {
-                accountType: user.accountType,
-                accountNumber: user.accountNumber,
-                iban: user.iban,
-                balance: user.balance,
-              })
-            }catch(error){
-              alert("Error while creating an account")
-            }
-      
+            })      
             navigate("/")
             alert("User create successfully")
           }catch(error){
@@ -107,31 +65,6 @@ function Signup() {
     }
   }
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  }
-
-  const handleDrop = (e) => {
-    e.preventDefault()
-    const file = e.dataTransfer.files[0]
-    if(file){
-      setUser({
-        ...user, 
-        photoUrl: URL.createObjectURL(file)
-      })
-    }
-  }
-
-  const onFileChange = (e) => {
-    const file = e.target.files[0]
-    if(file){
-      setUser({
-        ...user, 
-        photoUrl: URL.createObjectURL(file)
-      })
-    }
-  }
-
   return (
     <div className="signup">
       <form className="signup__form" onSubmit={handleRegistration}>
@@ -142,7 +75,7 @@ function Signup() {
 
         <div>
           <label className="form__label" htmlFor="name">Full Name <span>*</span></label>
-          <select className="title__dropdown" required name="title" value={user.title} onChange={handleChange}>
+          <select className="title__dropdown" required name="title" onChange={handleChange}>
             <option value="DEFAULT">Choose</option>
             <option value="Mr">Mr</option>
             <option value="Mrs">Mrs</option>
@@ -150,18 +83,18 @@ function Signup() {
             <option value="Dr">Dr</option>
             <option value="Others">Others</option>
           </select>
-          <input className="form__input name" type="text" id="name" required name="firstName" value={user.firstName} placeholder="First Name" onChange={handleChange}/>
-          <input className="form__input name" type="text" required name="lastName" value={user.lastName} placeholder="Last Name" onChange={handleChange}/>
+          <input className="form__input name" type="text" id="name" required name="firstName" placeholder="First Name" onChange={handleChange}/>
+          <input className="form__input name" type="text" required name="lastName" placeholder="Last Name" onChange={handleChange}/>
         </div>
 
         <div className="form__content">
           <div className="dob">
             <label className="form__label" htmlFor="dob">Date of Birth <span>*</span></label>
-            <input className="form__input" type="date" id="dob" required name="dateOfBirth" value={user.dateOfBirth} onChange={handleChange}/>
+            <input className="form__input" type="date" id="dob" required name="dateOfBirth" onChange={handleChange}/>
           </div>  
           <div className="maritalStatus">
             <label className="form__label" htmlFor="maritalStatus">Marital Status <span>*</span></label>
-            <select className="dropdown" required name="maritalStatus" value={user.maritalStatus} onChange={handleChange}>
+            <select className="dropdown" required name="maritalStatus" onChange={handleChange}>
               <option value="DEFAULT">Please select</option>
               <option value="Single">Single</option>
               <option value="Married">Married</option>
@@ -173,24 +106,24 @@ function Signup() {
         <div className="form__content">
           <div className="telephoneNumber">
             <label className="form__label" htmlFor="phoneNumber">Telephone Number <span>*</span></label>
-            <input className="form__input name" type="number" id="telephoneNphoneNumberumber" required name="phoneNumber" value={user.phoneNumber} placeholder="01 234 5678967" onChange={handleChange}/>
+            <input className="form__input name" type="number" id="telephoneNphoneNumberumber" required name="phoneNumber" placeholder="01 234 5678967" onChange={handleChange}/>
           </div>
           <div className="email">
             <label className="form__label" htmlFor="email">E-mail <span>*</span></label>
-            <input className="form__input name" type="email" id="email" required name="email" value={user.email} placeholder="E-Mail Address" onChange={handleChange}/>
+            <input className="form__input name" type="email" id="email" required name="email" placeholder="E-Mail Address" onChange={handleChange}/>
           </div>
         </div>
 
         <div>
           <label className="form__label">Mailing Home Address <span>*</span></label>
-          <input className="form__input address" type="text" required name="streetAddress" value={user.streetAddress} placeholder="Street Address" onChange={handleChange}/>          
+          <input className="form__input address" type="text" required name="streetAddress" placeholder="Street Address" onChange={handleChange}/>          
           <div className="form__content addressField">
-            <input className="form__input" type="text" required name="city" value={user.city} placeholder="City" onChange={handleChange}/>
-            <input className="form__input" type="text" required name="state" value={user.state} placeholder="State" onChange={handleChange}/>
+            <input className="form__input" type="text" required name="city" placeholder="City" onChange={handleChange}/>
+            <input className="form__input" type="text" required name="state" placeholder="State" onChange={handleChange}/>
           </div>
           <div className="form__content addressField">
-            <input className="form__input" type="number" required name="postalCode" value={user.postalCode} placeholder="Postal / Zip Code" onChange={handleChange}/>
-            <input className="form__input" type="text" required name="country" value={user.country} placeholder="Country" onChange={handleChange}/>
+            <input className="form__input" type="number" required name="postalCode" placeholder="Postal / Zip Code" onChange={handleChange}/>
+            <input className="form__input" type="text" required name="country" placeholder="Country" onChange={handleChange}/>
           </div>
         </div>
 
@@ -212,7 +145,7 @@ function Signup() {
           <div className="horizontal__line"></div>
           <div>
             <label className="form__label">Account Type <span>*</span></label>
-            <select className="dropdown accountType" required name="accountType" value={user.accountType} onChange={handleChange}>
+            <select className="dropdown accountType" required name="accountType" onChange={handleChange}>
               <option value='DEFAULT'>Please select an account type</option>
               <option value="Saving Account">Saving Account</option>
               <option value="Current Account">Current Account</option>
@@ -223,22 +156,22 @@ function Signup() {
         <div className="form__content">
           <div className="accountField">
             <label className="form__label" htmlFor="occupation">Occupation <span>*</span></label>
-            <input className="form__input" type="text" id="occupation" required name="occupation" value={user.occupation} placeholder="Occupation" onChange={handleChange}/>
+            <input className="form__input" type="text" id="occupation" required name="occupation" placeholder="Occupation" onChange={handleChange}/>
           </div>
           <div className="accountField">
             <label className="form__label" htmlFor="monthlyIncome">Monthly Income <span>*</span></label>
-            <input className="form__input" type="number" id="monthlyIncome" required name="monthlyIncome" value={user.monthlyIncome} placeholder="Monthly Income" onChange={handleChange}/>
+            <input className="form__input" type="number" id="monthlyIncome" required name="monthlyIncome" placeholder="Monthly Income" onChange={handleChange}/>
           </div>
         </div>
 
         <div className="form__content">
           <div className="password">
             <label className="form__label" htmlFor="password">Password <span>*</span></label>
-            <input className="form__input name" type="password" id="password" required name="password" value={user.password} onChange={handleChange}/>
+            <input className="form__input name" type="password" id="password" required name="password" onChange={handleChange}/>
           </div>
           <div className="confirmPassword">
             <label className="form__label" htmlFor="confirmPassword">Confirm Password <span>*</span></label>
-            <input className="form__input name" type="password" id="confirmPassword" required name="confirmPassword" value={user.confirmPassword} onChange={handleChange}/>
+            <input className="form__input name" type="password" id="confirmPassword" required name="confirmPassword" onChange={handleChange}/>
           </div>
         </div>
 
