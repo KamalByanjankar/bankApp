@@ -4,18 +4,21 @@ import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../context/firebase'
 import { useFormContext } from '../../context/FormProvider'
+import { useUserContext } from '../../context/UserProvider'
 
 function Signin() {
   const { user, handleChange } = useFormContext()
+  const { fetchData } = useUserContext()
   const navigate = useNavigate()
 
   const handleLogin = (e) => {
     e.preventDefault();
-    
+
     // Sign In using firebase
     signInWithEmailAndPassword(auth, user.email, user.password)
     .then((result) => {
       localStorage.setItem("authenticated", true)
+      fetchData()
       navigate("/dashboard")
     })
     .catch((error) => {
@@ -25,7 +28,7 @@ function Signin() {
 
   return (
     <div className="signin">
-     <form className="sigin__form" onSubmit={handleLogin}>
+     <form className="sigin__form" onSubmit={handleLogin} >
         <h3>Sign In</h3>
         <label>
           Username
