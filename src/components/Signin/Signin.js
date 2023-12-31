@@ -19,7 +19,9 @@ function Signin() {
     .then((result) => {
       localStorage.setItem("authenticated", true)
       fetchData()
-      navigate("/dashboard")
+      setTimeout(() => {
+        navigate("/dashboard")
+      }, 1500)
     })
     .catch((error) => {
       alert("Invalid username or password!")
