@@ -23,8 +23,8 @@ function Signup() {
     e.preventDefault();
     if(user.password === user.confirmPassword){
 
-      createAccount()
-
+      // createAccount()
+      
       // Create an account 
       createUserWithEmailAndPassword(auth, user.email, user.password).then(
         async (userCredentials) => {
@@ -51,9 +51,9 @@ function Signup() {
               iban: user.iban,
               balance: user.balance,
               userId: `${userCredentials.user.uid}`
-            })      
-            navigate("/")
+            })
             alert("User create successfully")
+            navigate("/")
           }catch(error){
             alert("Something went wrong!")
           }
@@ -175,7 +175,7 @@ function Signup() {
           </div>
         </div>
 
-        <input className="signup__formbtn" type="submit" value="Submit"/>
+        <input className="signup__formbtn" type="submit" value="Submit" onClick={createAccount}/>
         <p className="link">Already have an account!<Link to="/" >Sign In</Link></p>
       </form>
     </div>
