@@ -14,11 +14,12 @@ export const UserProvider = ({ children }) => {
         const querySnapshot = await getDocs(q)
         querySnapshot.forEach((doc) => {
             // console.log(doc.id, doc.data())
-            setUserData(doc.data())
+            setUserData({
+                data: doc.data(), 
+                id: doc.id
+            })
         })
     }
-
-    // console.log("from user context", userData)
 
     const value = {
         userData, fetchData
