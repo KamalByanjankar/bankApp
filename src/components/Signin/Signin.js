@@ -40,8 +40,10 @@ function Signin() {
           Password
           <input type="password" name="password" onChange={handleChange}/>
         </label>
-        <input type="submit" value="Log in" disabled={!user.email || !user.password} className="signin__formbtn"/>
-        <p>Don't have an account! <Link to="/signup">Register</Link></p>
+        <div className="signin__formbtn__contents">
+          <input type="submit" value="Log in" disabled={!user.email || !user.password} className="signin__formbtn"/>
+          <p>Don't have an account! <Link to="/signup">Register</Link></p>
+        </div>
       </form>       
     </div>
   )
