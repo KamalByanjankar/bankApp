@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState } from 'react'
 import { generateAccountNumber, generateIban } from '../components/Util/generateAccountNumber'
+import { signOut } from 'firebase/auth'
+import { auth } from './firebase'
 
 export const FormContext = createContext(null)
 
@@ -25,8 +27,25 @@ export const FormProvider = ({ children }) => {
         confirmPassword: "",
         accountNumber: "",
         iban: "",
-        balance: "0.00"
+        balance: "0.00",
+        disable: true,
     })
+
+    const handleLogout = () => {
+        signOut(auth).then(() => {
+            localStorage.removeItem("authenticated")
+            window.location = "/"
+        }).catch((error) => {
+            alert("Problem occured during log out!")
+        })
+    }
+
+    const handleFormEditButton = (e) => {
+        setUser({
+            ...user,
+            disable: !user.disable
+        })
+    }
 
     const handleChange = (e) => {
         setUser({
@@ -72,7 +91,7 @@ export const FormProvider = ({ children }) => {
     }
     
     const value = {
-        user, setUser, handleChange, handleDragOver, handleDrop, onFileChange, createAccount
+        user, setUser, handleChange, handleDragOver, handleDrop, onFileChange, createAccount, handleLogout, handleFormEditButton
     }
 
     return(
