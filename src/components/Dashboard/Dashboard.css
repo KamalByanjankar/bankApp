@@ -6,3 +6,12 @@
     height: auto;
     z-index: -998;
 }
+
+.dashboard__sidebar{
+    width: 20vw;
+}
+
+.dashboard__component{
+    display: flex;
+    align-items: center;
+}
