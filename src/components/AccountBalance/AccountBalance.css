@@ -1,0 +1,42 @@
+.accountBalance > h3{
+    position: relative;
+    color: #173b6c;
+}
+
+.accountBalance > h3::after{
+    content: "";
+    position: absolute;
+    background-color: #149ddd;
+    display: block;
+    width: 50px;
+    height: 3px;
+    left: 0;
+}
+
+.accountBalance__content{
+    width: 440px;
+    padding: 10px;
+}
+
+.accountBalance__item{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.accountBalance__item > label{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.accountBalance__item > span{
+    width: 16rem;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    font-size: 14px;
+    padding: 5px 15px;
+    text-align: end;
+    font-weight: 600;
+}
