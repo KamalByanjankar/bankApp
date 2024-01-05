@@ -1,0 +1,56 @@
+.services > h3{
+    margin: 30px 0 20px 0;
+    position: relative;
+    color: #173b6c;
+}
+
+.services > h3::after{
+    content: "";
+    position: absolute;
+    background-color: #149ddd;
+    display: block;
+    width: 50px;
+    height: 3px;
+    left: 0;
+}
+
+.services__cardItems > ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.services__cardItems > ul > li{
+    list-style-type: none;
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 3px 3px 7px rgb(27, 27, 27);
+    margin-right: 20px;
+    position: relative;
+    top: 0px;
+    background-color: #fff;
+}
+
+.services__cardItems > ul > li:hover{
+    top: -5px;
+    transition: all 0.5s ease-out;
+}
+
+.services__cardItems__link{
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: black;
+}
+.services__cardItems__link > h5{
+    margin: 0;
+    padding: 12px 0;
+}
+
+.services__cardItems__img{
+    width: 20%;
+    padding-top: 10px;
+}
