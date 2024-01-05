@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState } from 'react'
-import db, { auth } from './firebase'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import db from './firebase'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 
 export const UserContext = createContext(null)
@@ -7,9 +7,16 @@ export const UserContext = createContext(null)
 export const UserProvider = ({ children }) => {
     const [userData, setUserData] = useState([])
 
+
+    useEffect(() => {
+        if(userData.length === 0){
+            fetchData()
+        }     
+    }, [userData.length])
+
     const fetchData = async () => { 
         // console.log("Fetching data...")
-        const userId = auth.currentUser.uid;
+        const userId = localStorage.getItem("userId")
         const q = query(collection(db, "users"), where("userId", "==", userId))
         const querySnapshot = await getDocs(q)
         querySnapshot.forEach((doc) => {
@@ -20,6 +27,8 @@ export const UserProvider = ({ children }) => {
             })
         })
     }
+
+
 
     const value = {
         userData, fetchData

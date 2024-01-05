@@ -34,6 +34,7 @@ export const FormProvider = ({ children }) => {
     const handleLogout = () => {
         signOut(auth).then(() => {
             localStorage.removeItem("authenticated")
+            localStorage.removeItem("userId")
             window.location = "/"
         }).catch((error) => {
             alert("Problem occured during log out!")
