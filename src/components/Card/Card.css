@@ -1,0 +1,105 @@
+.card{
+    height: 94vh;
+}
+
+.card__content{
+    position: relative;
+    width: 450px;
+    height: 270px; 
+    border-radius: 25px;
+    /* background: rgba(255, 255, 255, 0.2); */
+    /* border: 1px solid rgba(255, 255, 255, 0.1); */
+    background: linear-gradient(to left, #283593, #1976d2);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 800px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 40px 20px 0 20px;
+}
+
+.card__bankname, .card__visalogo > img, .card__chiplogo > img, 
+.card__balance, .card__iban, .card__username, .card__expirydate, 
+.card__ring, .card__balance__toggle__btn{
+    position: absolute;
+}
+
+.card__visalogo > img{
+    width: 80px;
+    height: auto;
+    top: 35px;
+    right: 40px;
+    opacity: 0.8;;
+}
+
+.card__chiplogo > img{
+    width: 50px;
+    height: auto;
+    top: 100px;
+    left: 40px;
+    opacity: 0.8;
+}
+
+.card__bankname, .card__balance, .card__iban, .card__expirydate, .card__username{
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+}
+
+.card__bankname{
+    font-size: 1rem;
+    left: 20px;
+    top: 20px;
+}
+
+.card__balance{
+    left: 40px;
+    top: 110px;
+}
+
+.card__iban{
+    left: 40px;
+    bottom: 65px;
+    font-family: "Nunito", sans-serif;
+}
+
+.card__username{
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    left: 40px;
+    bottom: 35px;
+}
+
+.card__expirydate{
+    font-size: 0.8rem;
+    bottom: 35px;
+    right: 40px;
+}
+
+.card__ring{
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: transparent;
+    border: 50px solid rgba(255, 255, 255, 0.1);
+    right: -250px;
+    bottom: -250px;
+    box-sizing: border-box;
+}
+
+.card__ring::after{
+    content: "";
+    position: absolute;
+    height: 600px; 
+    width: 600px;
+    border-radius: 50%;
+    background: transparent;
+    border: 30px solid rgba(255, 255, 255, 0.1);
+    right: -110px;
+    bottom: -80px;
+    box-sizing: border-box;
+}
+
+.card__account__details{
+    display: flex;
+    align-items: center;
+}
