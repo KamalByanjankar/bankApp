@@ -1,6 +1,5 @@
 import React from 'react'
 import "./Services.css"
-import { Link } from 'react-router-dom'
 import depositLogo from "../../assets/deposit.png"
 import withdrawLogo from "../../assets/withdraw.png"
 import transferLogo from "../../assets/transfer.png"

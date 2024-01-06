@@ -49,10 +49,10 @@ function Signup() {
               accountType: user.accountType,
               accountNumber: user.accountNumber,
               iban: user.iban,
-              balance: user.balance,
+              balance: Number(user.balance),
               userId: `${userCredentials.user.uid}`
             })
-            alert("User create successfully")
+            alert("User created successfully")
             navigate("/")
           }catch(error){
             alert("Something went wrong!")

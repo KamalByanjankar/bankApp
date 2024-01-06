@@ -8,7 +8,7 @@ import { useUserContext } from '../../context/UserProvider'
 
 function Signin() {
   const { user, handleChange } = useFormContext()
-  const { fetchData } = useUserContext()
+  const {fetchData} = useUserContext()
   const navigate = useNavigate()
 
   const handleLogin = (e) => {
@@ -18,6 +18,7 @@ function Signin() {
     signInWithEmailAndPassword(auth, user.email, user.password)
     .then((result) => {
       localStorage.setItem("authenticated", true)
+      localStorage.setItem("userId", auth.currentUser.uid)
       fetchData()
       setTimeout(() => {
         navigate("/dashboard")
