@@ -5,6 +5,7 @@ import chiplogo from "../../assets/chip.png"
 import SubHeader from '../SubHeader/SubHeader'
 import { useUserContext } from '../../context/UserProvider'
 import { auth } from '../../context/firebase'
+import AccountDetails from '../AccountDetails/AccountDetails'
 
 function Card() {
   const { userData } = useUserContext()
@@ -33,6 +34,8 @@ function Card() {
                 <div className="card__expirydate">{expiryDate()}</div>
                 <div className="card__ring"></div>
               </div>
+
+              <AccountDetails />
             </div>
           </>
         )
