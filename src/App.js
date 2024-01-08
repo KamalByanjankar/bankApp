@@ -6,13 +6,15 @@ import Signup from './components/Signup/Signup';
 import Dashboard from './components/Dashboard/Dashboard';
 import PrivateRoute from './components/Util/PrivateRoute';
 import { FormProvider } from './context/FormProvider';
+import Card from './components/Card/Card';
 import { UserProvider } from './context/UserProvider';
 
 function App() {
+  
   return (
     <div className="App">
-      <FormProvider>
-        <UserProvider>
+      <UserProvider>
+        <FormProvider>
           <Header />
           <Router>
             <Routes>
@@ -24,10 +26,16 @@ function App() {
                 </PrivateRoute>
                 }
               />
+              <Route path="/card-information" element={
+                <PrivateRoute>
+                  <Card />
+                </PrivateRoute>
+                }
+              />
             </Routes>
           </Router>
-        </UserProvider>
-      </FormProvider>
+        </FormProvider>
+      </UserProvider>
     </div>
   );
 }
