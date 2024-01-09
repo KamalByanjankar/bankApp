@@ -1,0 +1,23 @@
+.informationsidebar{
+    width: 40%;
+    height: auto;
+    text-align: center;
+}
+
+.profile__image{
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+    margin: 20px 0;
+}
+
+.informationsidebar__profile > p{
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: left;
+    padding: 2px 20px;
+}
+
+.details{
+    font-weight: bold;
+}
