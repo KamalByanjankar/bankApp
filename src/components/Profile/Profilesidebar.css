@@ -7,8 +7,10 @@
 .profile__image{
     width: 100%;
     height: auto;
-    padding: 10px 0;
+    padding: 10px;
     margin: 20px 0;
+    border: 1px solid #fff;
+    box-sizing: border-box;
 }
 
 .informationsidebar__profile > p{
@@ -20,4 +22,10 @@
 
 .details{
     font-weight: bold;
+}
+
+@media only screen and (max-width: 860px){
+    .informationsidebar{
+        width: 100%;
+    }
 }

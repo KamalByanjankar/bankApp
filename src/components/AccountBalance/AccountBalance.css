@@ -40,3 +40,24 @@
     text-align: end;
     font-weight: 600;
 }
+
+@media only screen and (max-width: 690px){
+    .accountBalance__content{
+        width: 95%;
+    }
+
+    .accountBalance__item > span{
+        width: 13rem;
+        height: 16px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+}
+
+@media only screen and (max-width: 490px){
+    .accountBalance__item > span{
+        width: 11rem;
+        height: 12px;
+        font-size: 10px;
+    }
+}

@@ -54,3 +54,27 @@
     width: 20%;
     padding-top: 10px;
 }
+
+
+@media only screen and (max-width: 890px){
+    .services__cardItems > ul{
+        flex-wrap: wrap;
+    }
+
+    .services__cardItems > ul > li{
+        width: 45%;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 690px){
+    .services__cardItems > ul{
+        display: inline-block;
+    }
+
+    .services__cardItems > ul > li{
+        width: 90%;
+    }
+
+}

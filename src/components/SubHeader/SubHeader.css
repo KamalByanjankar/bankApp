@@ -77,3 +77,9 @@
 .navbar__navigation > ul > li > a:hover{
     color: black;
 }
+
+@media only screen and (max-width: 980px){
+    .subHeader{
+        margin-top: 5rem;
+    }
+}
