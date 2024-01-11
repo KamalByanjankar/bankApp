@@ -1,0 +1,93 @@
+.profileEdit__form{
+    width: 60%;
+}
+
+.profileForm__group{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    height: 12px;
+}
+
+.form__contents{
+    width: 320px;
+}
+
+.profileForm__group > label{
+    position: relative;
+    padding: 0 2px;
+    background-color: rgb(230, 230, 230);
+    font-size: 9px;
+    font-weight: bolder;
+    top: -24px;
+    left: 1px;
+    overflow: auto;
+    z-index: 5;
+}
+
+.profileForm__group > input{
+    border: none;
+    background-color: inherit;
+    font-size: 14px;
+    position: relative;
+    top: -26px;
+    padding: 5px 5px 2px 5px;
+    box-sizing: border-box;
+    outline: none;
+    width: 100%;
+}
+
+.profileForm__group > input::-webkit-outer-spin-button,
+.profileForm__group > input::-webkit-inner-spin-button{
+    appearance: none;
+}
+
+.profileForm__title{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.title{
+    width: 50px;
+}
+
+.profileForm__btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.edit__btn{
+    margin: 0 5px;
+    padding: 8px 35px;
+    cursor: pointer;
+    box-sizing: border-box;
+    box-shadow: 3px 3px 5px #000;
+    border-radius: 8px;
+    border: 0;
+    background-image: linear-gradient(#0dccea, #0d70ea);
+    color: #fff;
+}
+
+.edit__btn:hover{
+    background-image: linear-gradient(#18e0ff, #4695f7);
+}
+
+.profileForm__status{
+    border: none;
+    background-color: inherit;
+    width: 100%;
+    position: relative;
+    top: -26px;
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 860px){
+    .profileEdit__form{
+        width: 100%;
+        margin: 20px 0;
+    }
+}
