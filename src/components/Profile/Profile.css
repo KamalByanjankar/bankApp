@@ -1,0 +1,21 @@
+.information__contents{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px 20px;
+    width: 100%;
+}
+
+.line{
+    border: 1px solid #fff;
+    height: 80vh;
+}
+
+@media only screen and (max-width:860px){
+    .information__contents{
+        flex-direction: column;
+    }
+
+    .line{
+        height: auto;
+    }
+}
