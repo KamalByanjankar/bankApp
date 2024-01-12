@@ -1,0 +1,105 @@
+.transfer{
+    height: auto;
+}
+
+.transfer > h1{
+    text-align: center;
+}
+
+.transfer__contents{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin: 10px;
+}
+
+.transfer__field > p{
+    text-align: center;
+    font-size: 16px;
+    font-weight: bolder;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.transfer__field{
+    border: 1px solid #fff;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    border-radius: 10px;
+    padding: 10px;
+    width: 46%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.transer__items{
+    padding: 5px 20px;
+    margin-bottom: 5px;
+}
+
+.transer__items > label{
+    /* width: 40%; */
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.transer__items > input {
+    width: 90%;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    margin: 5px 0;
+}
+
+.transer__items > input::-webkit-outer-spin-button,
+.transer__items > input::-webkit-inner-spin-button{
+    appearance: none;
+}
+
+.transfer__btn{
+    text-align: center;
+}
+
+.transfer__btn > button{
+    appearance: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    border: 1px solid #222222;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 13px 23px;
+    transition: box-shadow .2s,-ms-transform .1s,-webkit-transform .1s,transform .1s;
+}
+
+.transfer__btn > button:active {
+  transform: scale(.96);
+}
+
+@media only screen and (max-width: 860px){
+    .transfer__contents{
+        flex-direction: column;
+    }
+
+    .transfer__field{
+        margin-bottom: 2rem;
+        width: 90%;
+    }
+
+    .transfer__btn{
+        margin-top: -2rem;
+    }
+}
+
+@media only screen and (max-width: 590px){
+    .transer__items > input{
+        font-size: 12px;
+    }
+
+    .transfer__btn > button{
+        font-size: 12px;
+        padding: 10px 20px;
+    }
+}
