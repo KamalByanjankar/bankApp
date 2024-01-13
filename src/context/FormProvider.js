@@ -102,7 +102,7 @@ export const FormProvider = ({ children }) => {
             return;
         }
         
-        if(user.accountNumber !== ""){
+        if(user.accountType !== ""){
             const storageRef = ref(storage, `/Images/${user.photo.name}`);
             const uploadTask = uploadBytesResumable(storageRef, user.photo);
             uploadTask.on(

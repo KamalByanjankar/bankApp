@@ -126,23 +126,6 @@ function Signup() {
         </div>
 
         <div>
-          <label className="form__label">Upload a photo <span>*</span></label>
-          <div className="dropzone" onDragOver={handleDragOver} onDrop={handleDrop} required onClick={() => refValue.current.click()}>
-            <p>Drag and Drop Files to Upload</p>
-            <p>Or</p>
-            <p>Click to upload image</p>
-            <input type="file" ref={refValue} name="photo" accept="image/*" onChange={onFileChange} hidden/>
-          </div>
-          {
-            user.photo ? (<img src={URL.createObjectURL(user.photo)} alt="User Profile" width={130} height={150}/>) : ""
-          }
-          <div>
-            <button type="button" onClick={handleStoreImage}>Upload</button>
-            <p>Image Uploaded: {user.percent} %</p>
-          </div>
-        </div>
-
-        <div>
           <p className="signup__form__header">Account Information</p>
           <div className="horizontal__line"></div>
           <div>
@@ -174,6 +157,23 @@ function Signup() {
           <div className="confirmPassword">
             <label className="form__label" htmlFor="confirmPassword">Confirm Password <span>*</span></label>
             <input className="form__input name" type="password" id="confirmPassword" required name="confirmPassword" onChange={handleChange}/>
+          </div>
+        </div>
+
+        <div>
+          <label className="form__label">Upload a photo <span>*</span></label>
+          <div className="dropzone" onDragOver={handleDragOver} onDrop={handleDrop} required onClick={() => refValue.current.click()}>
+            <p>Drag and Drop Files to Upload</p>
+            <p>Or</p>
+            <p>Click to upload image</p>
+            <input type="file" ref={refValue} name="photo" accept="image/*" onChange={onFileChange} hidden/>
+          </div>
+          {
+            user.photo ? (<img src={URL.createObjectURL(user.photo)} alt="User Profile" width={130} height={150}/>) : ""
+          }
+          <div>
+            <button type="button" onClick={handleStoreImage}>Upload</button>
+            <p>Image Uploaded: {user.percent} %</p>
           </div>
         </div>
 
