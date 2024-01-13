@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState } from 'react'
 import { generateAccountNumber, generateIban } from '../components/Util/generateAccountNumber'
 import { signOut } from 'firebase/auth'
-import { auth } from './firebase'
+import { auth, storage } from './firebase'
+import { getDownloadURL, ref, uploadBytesResumable } from '@firebase/storage'
 
 export const FormContext = createContext(null)
 
@@ -19,6 +20,7 @@ export const FormProvider = ({ children }) => {
         state: "",
         postalCode: "",
         country: "",
+        photo: "",
         photoUrl: "",
         accountType: "",
         occupation: "",
@@ -27,8 +29,9 @@ export const FormProvider = ({ children }) => {
         confirmPassword: "",
         accountNumber: "",
         iban: "",
-        balance: "0.00",
+        balance: Number("50.00"),
         disable: true,
+        percent: "0"
     })
 
     const handleLogout = () => {
@@ -65,7 +68,7 @@ export const FormProvider = ({ children }) => {
         if(file){
             setUser({
             ...user, 
-            photoUrl: URL.createObjectURL(file)
+            [e.target.name]: file
             })
         }
     }
@@ -74,12 +77,14 @@ export const FormProvider = ({ children }) => {
         const file = e.target.files[0]
         if(file){
             setUser({
-            ...user, 
-            photoUrl: URL.createObjectURL(file)
+            ...user,
+            [e.target.name]: file
+            // photoUrl: URL.createObjectURL(file)
             })
         }
     }
-    const createAccount = () => {
+
+    const handleCreateAccount = () => {
         // Generate account number
         const generatedAccountNumber = generateAccountNumber(user.accountType)
         const generatedIban = generateIban(generatedAccountNumber)
@@ -90,9 +95,52 @@ export const FormProvider = ({ children }) => {
           iban: generatedIban.replace(/\W/gi, '').replace(/(.{4})/g, '$1 ')
         })
     }
-    
+
+    const handleStoreImage = () => {
+        if (!user.photo) {
+            alert("Please upload an image first!");
+            return;
+        }
+        
+        if(user.accountNumber !== ""){
+            const storageRef = ref(storage, `/Images/${user.photo.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, user.photo);
+            uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const percent = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+        
+                // update progress
+                setUser({
+                    ...user,
+                    percent: percent
+                })
+                },
+                (err) => console.log(err),
+                () => {
+                    // download url
+                    getDownloadURL(uploadTask.snapshot.ref).then((imageUrl) => {
+                        // console.log(imageUrl)
+                        setUser({
+                            ...user,
+                            photoUrl: imageUrl
+                        })
+                    })
+                }
+            )
+        }
+        else{
+            alert("Fill up the required form")
+        }
+        
+    }
+
     const value = {
-        user, setUser, handleChange, handleDragOver, handleDrop, onFileChange, createAccount, handleLogout, handleFormEditButton
+        user, setUser, handleChange, handleDragOver, 
+        handleDrop, onFileChange, handleCreateAccount, handleLogout, 
+        handleFormEditButton, handleStoreImage
     }
 
     return(

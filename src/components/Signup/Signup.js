@@ -13,60 +13,58 @@ function Signup() {
     handleDragOver, 
     handleDrop, 
     onFileChange,
-    createAccount
+    handleCreateAccount,
+    handleStoreImage
   } = useFormContext()
 
   const refValue = useRef()
-  let navigate = useNavigate()
+  const navigate = useNavigate()
 
   const handleRegistration = async (e) => {
     e.preventDefault();
-    if(user.password === user.confirmPassword){
-
-      // createAccount()
-      
+    if(user.password === user.confirmPassword && user.photoUrl !== ""){
+      try{
       // Create an account 
-      createUserWithEmailAndPassword(auth, user.email, user.password).then(
+        createUserWithEmailAndPassword(auth, user.email, user.password).then(
         async (userCredentials) => {
-          try{
-            const docRef = collection(db, "users")
-            await addDoc(docRef, {
-              title: user.title,
-              firstName: user.firstName,
-              lastName: user.lastName,
-              dateOfBirth: user.dateOfBirth,
-              maritalStatus: user.maritalStatus,
-              phoneNumber: user.phoneNumber,
-              email: user.email,
-              streetAddress: user.streetAddress,
-              city: user.city,
-              state: user.state,
-              postalCode: user.postalCode,
-              country: user.country,
-              photoUrl: user.photoUrl,
-              occupation: user.occupation,
-              monthlyIncome: user.monthlyIncome,
-              accountType: user.accountType,
-              accountNumber: user.accountNumber,
-              iban: user.iban,
-              balance: Number(user.balance),
-              userId: `${userCredentials.user.uid}`
-            })
-            alert("User created successfully")
-            navigate("/")
-          }catch(error){
-            alert("Something went wrong!")
-          }
-        }
-      )
+          const docRef = collection(db, "users")
+          await addDoc(docRef, {
+          title: user.title,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          dateOfBirth: user.dateOfBirth,
+          maritalStatus: user.maritalStatus,
+          phoneNumber: user.phoneNumber,
+          email: user.email,
+          streetAddress: user.streetAddress,
+          city: user.city,
+          state: user.state,
+          postalCode: user.postalCode,
+          country: user.country,
+          photoUrl: user.photoUrl,
+          occupation: user.occupation,
+          monthlyIncome: user.monthlyIncome,
+          accountType: user.accountType,
+          accountNumber: user.accountNumber,
+          iban: user.iban,
+          balance: Number(user.balance),
+          userId: `${userCredentials.user.uid}`
+          })
+          alert("User created successfully")
+          navigate("/")
+        })
+      }catch(error){
+        alert("Something went wrong!")
+      }
     }
     else{
-      alert("Password don't match!")
+      alert("Password don't match or fill all the required fields")
     }
   }
 
   return (
     <div className="signup">
+
       <form className="signup__form" onSubmit={handleRegistration}>
         <h3>Account Opening Form</h3>
         <div className="horizontal__line"></div>
@@ -129,15 +127,19 @@ function Signup() {
 
         <div>
           <label className="form__label">Upload a photo <span>*</span></label>
-          <div className="dropzone" onDragOver={handleDragOver} onDrop={handleDrop} onClick={() => refValue.current.click()}>
+          <div className="dropzone" onDragOver={handleDragOver} onDrop={handleDrop} required onClick={() => refValue.current.click()}>
             <p>Drag and Drop Files to Upload</p>
             <p>Or</p>
             <p>Click to upload image</p>
-            <input type="file" ref={refValue} name="photoUrl" onChange={onFileChange} required hidden/>
+            <input type="file" ref={refValue} name="photo" accept="image/*" onChange={onFileChange} hidden/>
           </div>
           {
-            user.photoUrl ? (<img src={user.photoUrl} alt="User Profile" width={120} height={150}/>) : ""
+            user.photo ? (<img src={URL.createObjectURL(user.photo)} alt="User Profile" width={130} height={150}/>) : ""
           }
+          <div>
+            <button type="button" onClick={handleStoreImage}>Upload</button>
+            <p>Image Uploaded: {user.percent} %</p>
+          </div>
         </div>
 
         <div>
@@ -175,7 +177,7 @@ function Signup() {
           </div>
         </div>
 
-        <input className="signup__formbtn" type="submit" value="Submit" onClick={createAccount}/>
+        <input className="signup__formbtn" type="submit" value="Submit" onClick={handleCreateAccount} />
         <p className="link">Already have an account!<Link to="/" >Sign In</Link></p>
       </form>
     </div>
