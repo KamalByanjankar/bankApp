@@ -6,6 +6,8 @@ import Signup from './components/Signup/Signup';
 import Dashboard from './components/Dashboard/Dashboard';
 import PrivateRoute from './components/Util/PrivateRoute';
 import { FormProvider } from './context/FormProvider';
+import Transfer from './components/Transfer/Transfer';
+import Profile from './components/Profile/Profile';
 import Card from './components/Card/Card';
 import { UserProvider } from './context/UserProvider';
 
@@ -23,6 +25,18 @@ function App() {
               <Route path="/dashboard" element={
                 <PrivateRoute>
                   <Dashboard/>
+                </PrivateRoute>
+                }
+              />
+              <Route path="/transfer" element={
+                <PrivateRoute>
+                  <Transfer />
+                </PrivateRoute>
+                }
+              />
+              <Route path="/profile" element={
+                <PrivateRoute>
+                  <Profile />
                 </PrivateRoute>
                 }
               />
