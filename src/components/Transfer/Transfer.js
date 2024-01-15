@@ -5,6 +5,7 @@ import { useUserContext } from '../../context/UserProvider'
 import { collection, getDocs } from 'firebase/firestore'
 import db from '../../context/firebase'
 import { transact } from '../Util/transact'
+import { addTransactions } from '../Util/addTransactions'
 
 function Transfer() {
   const { userData } = useUserContext()
@@ -30,7 +31,7 @@ function Transfer() {
         })
   }
   fetchAllAccounts()
-  }, [])
+  }, [state])
 
   const handleTransfer = async(e) => {
     e.preventDefault()
@@ -61,6 +62,15 @@ function Transfer() {
     }
       
     transact(
+      state.accounts[acc1].id, 
+      state.accounts[acc1].data.balance, 
+      state.accounts[acc2].id, 
+      state.accounts[acc2].data.balance,
+      state.amount,
+      state.description
+    )
+
+    addTransactions(
       state.accounts[acc1].id, 
       state.accounts[acc1].data.balance, 
       state.accounts[acc2].id, 

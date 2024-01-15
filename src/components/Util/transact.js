@@ -1,6 +1,5 @@
 import { doc, updateDoc } from "firebase/firestore"
 import db from "../../context/firebase"
-import { addTransactions } from "./addTransactions"
 
 const transact = async (senderId, senderBalance, receiverId, receiverBalance, amount, description) =>{
     if(senderBalance <= amount){
@@ -21,7 +20,6 @@ const transact = async (senderId, senderBalance, receiverId, receiverBalance, am
         alert("Error while transferring amout!")
       }
       alert("Transfer Successful")
-      addTransactions(description, amount, senderBalance, senderId, receiverId, receiverBalance)
       window.location="/transfer"
     }
 }

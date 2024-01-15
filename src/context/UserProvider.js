@@ -7,12 +7,9 @@ export const UserContext = createContext(null)
 export const UserProvider = ({ children }) => {
     const [userData, setUserData] = useState([])
 
-
-    useEffect(() => {
-        if(userData.length === 0){
-            fetchData()
-        }     
-    }, [userData.length])
+    useEffect(() => {   
+        fetchData()
+    }, [])
 
     const fetchData = async () => { 
         // console.log("Fetching data...")
@@ -27,8 +24,6 @@ export const UserProvider = ({ children }) => {
             })
         })
     }
-
-
 
     const value = {
         userData, fetchData
