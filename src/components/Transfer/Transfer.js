@@ -54,7 +54,6 @@ function Transfer() {
       else if(state.accounts[i].data.iban === state.receiverIban){
         acc2 = i;
       }
-
       else{
         alert("IBAN not found. Please check your IBAN number!")
         window.location="/transfer"
