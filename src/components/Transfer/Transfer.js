@@ -71,20 +71,34 @@ function Transfer() {
     )
 
     addTransactions(
-      state.accounts[acc1].id, 
-      state.accounts[acc1].data.balance, 
+      state.accounts[acc1].id,
+      state.accounts[acc1].data, 
       state.accounts[acc2].id, 
-      state.accounts[acc2].data.balance,
+      state.accounts[acc2].data,
       state.amount,
       state.description
     )
   }
 
   const handleTransferChange = (e) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value
-    })
+    if(e.target.name === "amount"){
+      setState({
+        ...state,
+        [e.target.name]: e.target.value.replace(/^0/, "")
+      })
+    }
+    else{
+      setState({
+        ...state,
+        [e.target.name]: e.target.value
+      })
+    }
+  }
+
+  const handleKeyDown = (e) => {
+    if(e.key === '-' || e.key === '+'){
+      e.preventDefault()
+    }
   }
 
   return (
@@ -121,7 +135,7 @@ function Transfer() {
                   </div>
                   <div className="transer__items">
                     <label>Amount *</label>
-                    <input type="number" name="amount" value={state.amount} required onChange={handleTransferChange} />
+                    <input type="number" name="amount" value={state.amount} required onChange={handleTransferChange} onKeyDown={(e) => handleKeyDown(e)}/>
                   </div>
                   <div className="transer__items">
                     <label>Description *</label>
