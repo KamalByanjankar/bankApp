@@ -1,0 +1,114 @@
+.transaction{
+    height: auto;
+}
+
+.transaction__account__items{
+    margin-left: 2rem;
+}
+
+.transaction__account__items > label{
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0 30px 0 10px;
+}
+
+.transaction__account__items > span{
+    display: inline-block;
+    width: 16rem;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    font-size: 14px;
+    padding: 5px 15px;
+    text-align: end;
+    font-weight: 600;
+}
+
+.transaction__contents > table{
+    margin: 40px auto;
+    width: 100%;
+}
+
+.transaction__contents > table > thead > tr {
+    background-color: lightgray;
+}
+
+.transaction__contents > table > thead > tr > td {
+    font-weight: bold;
+    padding: 10px 20px;
+    align-items: center;
+}
+
+.transaction__contents > table > thead > tr > th {
+    vertical-align: top;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.transaction__contents > table > tbody > tr > td {
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.transaction__load{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.transaction__load > p{
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.transaction__load > p:hover{
+    text-decoration: underline;
+}
+
+.view__order{
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.view__order:hover{
+    text-decoration: underline;
+}
+
+.viewOrder{
+    position: absolute;
+    top: 10rem;
+    left: 10rem;
+    background-color: inherit;
+    width: 73%;
+    height: 70vh;
+}
+
+@media only screen and (max-width: 947px){
+    .transaction__contents > table > thead > tr > th{
+        padding: 5px 10px;
+    }
+
+    .transaction__contents > table > thead > tr > th:nth-of-type(6),
+    .transaction__contents > table > tbody > tr > td:nth-of-type(6){
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 680px){
+    .transaction__contents > table{
+        margin: 20px 30px 0 0;
+    }
+
+    .transaction__contents > table > thead > tr > th:nth-of-type(2),
+    .transaction__contents > table > tbody > tr > td:nth-of-type(2){
+        display: none;
+    }
+}
