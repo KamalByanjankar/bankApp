@@ -10,6 +10,7 @@ import Transfer from './components/Transfer/Transfer';
 import Profile from './components/Profile/Profile';
 import Card from './components/Card/Card';
 import { UserProvider } from './context/UserProvider';
+import Transactions from './components/Transactions/Transactions';
 
 function App() {
   
@@ -31,6 +32,12 @@ function App() {
               <Route path="/transfer" element={
                 <PrivateRoute>
                   <Transfer />
+                </PrivateRoute>
+                }
+              />
+              <Route path="/transactions" element={
+                <PrivateRoute>
+                  <Transactions />
                 </PrivateRoute>
                 }
               />
