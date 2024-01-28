@@ -24,36 +24,28 @@
     font-weight: 600;
 }
 
-.transaction__contents > table{
+table{
     margin: 40px auto;
+    border-collapse: collapse;
     width: 100%;
+    table-layout: fixed;
 }
 
 .transaction__contents > table > thead > tr {
     background-color: lightgray;
 }
 
-.transaction__contents > table > thead > tr > td {
-    font-weight: bold;
-    padding: 10px 20px;
-    align-items: center;
-}
-
-.transaction__contents > table > thead > tr > th {
-    vertical-align: top;
-    padding: 10px 20px;
+th, td{
+    padding: 0.5rem;
     text-align: center;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
-}
-
-.transaction__contents > table > tbody > tr > td {
-    border: 1px solid #ddd;
-    padding: 8px 10px;
-    font-size: 16px;
-    text-align: center;
 }
 
 .transaction__load{
