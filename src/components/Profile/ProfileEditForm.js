@@ -75,7 +75,7 @@ function ProfileEditForm() {
         <div className="profileForm__title">
           <div className="profileForm__group form__contents">
             <label>Date of Birth</label>
-            <input className="test" type="date" name="dateOfBirth" value={updatedUser.dateOfBirth} readOnly/>
+            <input type="date" name="dateOfBirth" value={updatedUser.dateOfBirth} readOnly/>
           </div>
           <div className="profileForm__group form__contents">
             <label>Marital Status</label>
