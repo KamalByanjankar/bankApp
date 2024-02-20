@@ -25,13 +25,13 @@
     "semantic-ui-react": "^2.1.4",
     "tough-cookie": "4.1.3",
     "web-vitals": "^2.1.4",
-    "word-wrap": "1.2.5",
-    "undici": "6.6.2"
+    "word-wrap": "1.2.5"
   },
   "devDependencies": {
     "@svgr/webpack": "8.1.0",
     "postcss": "8.4.31",
-    "semver": "7.5.4"
+    "semver": "7.5.4",
+    "undici": "6.6.2"
   },
   "overrides": {
     "@svgr/webpack": "$@svgr/webpack",
