@@ -31,7 +31,8 @@
     "@firebase/firestore": "4.4.2",
     "@firebase/functions": "0.11.1",
     "webpack-dev-middleware": "7.1.1",
-    "express": "4.19.2"
+    "express": "4.19.2",
+    "undici": "6.12.0"
   },
   "devDependencies": {
     "@svgr/webpack": "8.1.0",
